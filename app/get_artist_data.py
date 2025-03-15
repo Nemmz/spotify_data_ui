@@ -11,8 +11,7 @@ import urllib.parse
 import requests
 
 # Spotify API credentials
-CLIENT_ID = "e186a07c48384716bf0ab5da7d7ba70c"
-CLIENT_SECRET = "4c103175d97747ed840b5233147a9d2b"
+
 
 
 def get_token() -> None:
