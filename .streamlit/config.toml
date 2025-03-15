@@ -5,9 +5,9 @@ toolbarMode = "minimal"
 level = "warning"
 
 [theme]
-primaryColor="FFFFFF"
+primaryColor="EDF4F2"
 backgroundColor="#000000"
-secondaryBackgroundColor="#808080"
+secondaryBackgroundColor="#31473A"
 textColor="#FFFFFF"
 font="monospace"
 
