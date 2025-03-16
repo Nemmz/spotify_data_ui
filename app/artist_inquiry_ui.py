@@ -95,7 +95,7 @@ if text_input:
             if data:
                 artist = data["artists"]["items"][0]
                 artist_url = artist["external_urls"]["spotify"]
-                right = right.container(border=True).image(artist["assets"][0]["url"],
+                right = right.container(border=True).image(artist["images"][0]["url"],
                                                            use_container_width=True)
 
         except RuntimeError as err:
