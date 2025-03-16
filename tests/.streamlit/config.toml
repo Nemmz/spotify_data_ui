@@ -1,0 +1,15 @@
+[client]
+toolbarMode = "minimal"
+
+[logger]
+level = "warning"
+
+[theme]
+primaryColor="EDF4F2"
+backgroundColor="#000000"
+secondaryBackgroundColor="#31473A"
+textColor="#FFFFFF"
+font="monospace"
+
+[browser]
+gatherUsageStats = false

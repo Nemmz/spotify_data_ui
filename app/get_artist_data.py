@@ -7,12 +7,8 @@ Resources: Spotify Development Examples
 """
 import json
 import urllib.parse
-from wsgiref import headers
-
-from dateutil import tz
 import requests
 import streamlit as st
-from datetime import datetime
 
 CLIENT_ID = st.secrets["SPOTIFY_CLIENT_ID"]
 CLIENT_SECRET = st.secrets["SPOTIFY_CLIENT_SECRET"]
@@ -27,6 +23,7 @@ def get_token() -> str | None:
         "client_secret": CLIENT_SECRET,
     }
 
+    # Attempts to Grab Token
     try:
         response = requests.post(token_url, headers=token_headers, data=data)
         response.raise_for_status()
@@ -35,12 +32,13 @@ def get_token() -> str | None:
         return None
 
 
-def search_artist(artist: str, access_token: tuple, data_file: str) -> dict | None:
+def search_artist(artist: str, access_token: tuple, data_file: str) -> dict | list:
     """Uses artist name to search for Artist ID to display data."""
     search_artist_headers = {"Authorization": f"Bearer {access_token}"}
     query = urllib.parse.quote(artist)
     search_url = f"https://api.spotify.com/v1/search?q={query}&type=artist&limit=1"
 
+    # Will Attempt to Grab Artist Data from API
     try:
         artist_data = requests.get(search_url, headers=search_artist_headers, timeout=5).json()
         if artist_data and artist_data["artists"]["items"][0]["name"].lower() == artist.lower():
@@ -53,6 +51,7 @@ def search_artist(artist: str, access_token: tuple, data_file: str) -> dict | No
             artist_data = json.load(file)
         return artist_data
 
+    # If an Error Happens
     except TypeError as error:
         st.error(str(error), icon="🛠️")
         print(error)
@@ -67,6 +66,7 @@ def get_top_tracks(artist_id: str, access_token: tuple, data_file: str) -> dict 
     """Grabs the top songs from an artist using the Artist ID and will put into a json"""
     top_tracks_url = f"https://api.spotify.com/v1/artists/{artist_id}/top-tracks"
     track_headers= {"Authorization": f"Bearer {access_token}"}
+
     try:
         top_tracks_data = requests.get(top_tracks_url, headers=track_headers, timeout=5).json()
         top_tracks = [f"{idx + 1}. {track['name']}" for idx, track in enumerate(top_tracks_data["tracks"])]
@@ -75,6 +75,7 @@ def get_top_tracks(artist_id: str, access_token: tuple, data_file: str) -> dict 
             with open(data_file, "w", encoding="utf-8") as file:
                 file.write(json.dumps(top_tracks, indent=4, sort_keys=True))
             return top_tracks
+
         else:
             clear_json(data_file)
         with open(data_file, "r", encoding="utf-8") as file:
@@ -105,13 +106,6 @@ def get_albums(artist_id: str, access_token: tuple, data_file: str) -> dict | li
         st.error(str(err), icon="🛠️")
     st.error("No albums found.")
     return {}
-
-
-def last_updated() -> str:
-    """Returns the last updated date for an artist."""
-    current_time = datetime.now(tz.gettz("America/New_York"))
-    current_time = current_time.replace(tzinfo=tz.gettz('UTC')).astimezone(tz.gettz("MST"))
-    return current_time.strftime("%B %d, %Y, %I:%M %p")
 
 def clear_json(data_file)-> None:
     """Clears the JSON file from the previous searches"""

@@ -1,0 +1,17 @@
+{
+    "artists": {
+        "items": [
+            {
+                "external_urls": {
+                    "spotify": "spotify_url"
+                },
+                "genres": [
+                    "emo",
+                    "pop punk"
+                ],
+                "id": "123",
+                "name": "My Chemical Romance"
+            }
+        ]
+    }
+}
