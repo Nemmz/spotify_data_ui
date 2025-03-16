@@ -43,7 +43,6 @@ def search_artist(artist: str, access_token: tuple, data_file: str) -> dict | No
 
     try:
         artist_data = requests.get(search_url, headers=search_artist_headers, timeout=5).json()
-
         if artist_data and artist_data["artists"]["items"][0]["name"].lower() == artist.lower():
             with open(data_file, "w", encoding="utf-8") as file:
                 file.write(json.dumps(artist_data, indent=4, sort_keys=True))
@@ -52,7 +51,6 @@ def search_artist(artist: str, access_token: tuple, data_file: str) -> dict | No
             clear_json(data_file)
         with open(data_file, "r", encoding="utf-8") as file:
             artist_data = json.load(file)
-        st.warning("Invalid Input: Ensure the Name is Exactly As Appears on Spotify...",icon="⚠️")
         return artist_data
 
     except TypeError as error:
@@ -85,6 +83,27 @@ def get_top_tracks(artist_id: str, access_token: tuple, data_file: str) -> dict 
     except requests.exceptions.RequestException as err:
         st.error(str(err), icon="🛠️")
     st.error("No songs found.", icon="❌")
+    return {}
+
+def get_albums(artist_id: str, access_token: tuple, data_file: str) -> dict | list:
+    """Returns all albums by the artist and put it into a json"""
+    albums_url = f"https://api.spotify.com/v1/artists/{artist_id}/albums"
+    album_headers= {"Authorization": f"Bearer {access_token}"}
+    try:
+        albums_data = requests.get(albums_url, headers=album_headers, timeout=5).json()
+        albums = [album["name"] for album in albums_data.get("items", [])]
+        if albums:
+            with open(data_file, "w", encoding="utf-8") as file:
+                file.write(json.dumps(albums, indent=4, sort_keys=True))
+            return albums
+        else:
+            clear_json(data_file)
+            with open(data_file, "r", encoding="utf-8") as file:
+                albums = json.load(file)
+            return albums
+    except requests.exceptions.RequestException as err:
+        st.error(str(err), icon="🛠️")
+    st.error("No albums found.")
     return {}
 
 

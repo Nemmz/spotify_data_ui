@@ -1,0 +1,45 @@
+{
+    "artists": {
+        "href": "https://api.spotify.com/v1/search?offset=0&limit=1&query=Post%20Malone&type=artist",
+        "items": [
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/246dkjvS1zLTtiykXe5h60"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 46680258
+                },
+                "genres": [],
+                "href": "https://api.spotify.com/v1/artists/246dkjvS1zLTtiykXe5h60",
+                "id": "246dkjvS1zLTtiykXe5h60",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5ebe17c0aa1714a03d62b5ce4e0",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab67616100005174e17c0aa1714a03d62b5ce4e0",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f178e17c0aa1714a03d62b5ce4e0",
+                        "width": 160
+                    }
+                ],
+                "name": "Post Malone",
+                "popularity": 89,
+                "type": "artist",
+                "uri": "spotify:artist:246dkjvS1zLTtiykXe5h60"
+            }
+        ],
+        "limit": 1,
+        "next": "https://api.spotify.com/v1/search?offset=1&limit=1&query=Post%20Malone&type=artist",
+        "offset": 0,
+        "previous": null,
+        "total": 806
+    }
+}

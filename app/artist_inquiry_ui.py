@@ -6,11 +6,14 @@ Resources:
 """
 import streamlit as st
 import time
-from get_artist_data import get_token, search_artist, get_top_tracks
+from get_artist_data import get_token, search_artist, get_top_tracks, get_albums
 
 ARTIST_DATA_FILE = "app/data/artist.json"
 SONG_DATA_FILE = "app/data/top_songs.json"
+ALBUM_DATA_FILE = "app/data/albums.json"
 token = get_token()
+SPOTIFY_IMAGE_LRG = "app/images/Spotify_Full_Logo_RGB_Black.png"
+SPOTIFY_IMAGE_SML = "app/images/Spotify_Primary_Logo_RGB_Green.png"
 
 
 # Edits the Page Name and Icon Next to it.
@@ -32,8 +35,13 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-st.header("Spotify Artist Data", divider=True)
+st.header("Spotify Artist Data", divider="green")
 
+# Adds the Spotify Logo at the Top of the Page
+st.logo(
+    SPOTIFY_IMAGE_LRG,
+    link="https://open.spotify.com/",
+    icon_image=SPOTIFY_IMAGE_SML)
 
 if "visibility" not in st.session_state:
     st.session_state.visibility = "visible"
@@ -68,23 +76,36 @@ if text_input:
                 right = right.container(border=True).image(artist["images"][0]["url"],
                                                            use_container_width=True)
 
-        except Exception as e:
-            st.write(e)
+        except Exception as err:
+            st.error("No Picture Found", icon="❌")
 
+    # Adds a Link to the Spotify Artist on the Sidebar
     with st.sidebar:
-        st.link_button("Artist's Spotify Page",
-                       url=artist_url,
-                       type="secondary",
-                       icon="🔗",
-                       use_container_width=False)
+        try:
+            st.link_button("Artist's Spotify Page",
+                           url=artist_url,
+                           type="secondary",
+                           icon="🔗",
+                           use_container_width=False)
+            st.subheader("Artist's Albums", divider="grey")
+            st.text("• " + "\n• ".join(get_albums(artist['id'], token, ALBUM_DATA_FILE)))
+        except Exception as err:
+            st.error("Could Not Find Artist: Ensure the Name is Exactly as Appears on Spotify.", icon="⚠️")
 
+
+    # Displays the data found for the Artist on the left column
     with left:
-        if data:
-            st.text(f"Artist Name: {artist['name']}")
-            if artist["genres"]:
-                st.text(f"Genres: {', '.join(artist['genres']).title()}")
-            else:
-                st.text("Genres: N/a")
-            st.text(f"Popularity: {100 - artist["popularity"]}")
-            st.text(f"Top Tracks:\n{'\n'.join(get_top_tracks(artist['id'], token, SONG_DATA_FILE))}")
-
+        try:
+            if data:
+                st.text(f"Artist Name: {artist['name']}")
+                st.text(f"Followers: {artist['followers']['total']}")
+                if artist["genres"]:
+                    st.text(f"Genres: {', '.join(artist['genres']).title()}")
+                else:
+                    st.text("Genres: N/a")
+                with st.expander(f"Popularity: {100 - artist["popularity"]}"):
+                    st.markdown("Popularity is on a scale of 1-100 and is not one to one but rather a general idea "
+                                "of their popularity.")
+                st.text(f"Top Tracks:\n{'\n'.join(get_top_tracks(artist['id'], token, SONG_DATA_FILE))}")
+        except Exception as err:
+            st.error("No Data Found", icon="❌")
