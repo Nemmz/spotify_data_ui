@@ -30,6 +30,8 @@ def get_token() -> str | None:
         return response.json().get("access_token")
     except requests.exceptions.RequestException as err:
         return None
+    except Exception as error:
+        st.error(f"Unexpected has occured.", icon="❌")
 
 
 def search_artist(artist: str, access_token: tuple, data_file: str) -> dict | list:
@@ -58,6 +60,8 @@ def search_artist(artist: str, access_token: tuple, data_file: str) -> dict | li
     except OSError as error:
         st.error(str(error), icon="🛠️")
         print(error)
+    except Exception as error:
+        st.error(f"Unexpected has occured.")
     st.error("No artist data found.", icon="❌")
     return {}
 
@@ -83,6 +87,8 @@ def get_top_tracks(artist_id: str, access_token: tuple, data_file: str) -> dict 
         return top_tracks
     except requests.exceptions.RequestException as err:
         st.error(str(err), icon="🛠️")
+    except Exception as error:
+        st.error(f"Unexpected has occured.")
     st.error("No songs found.", icon="❌")
     return {}
 
@@ -104,6 +110,8 @@ def get_albums(artist_id: str, access_token: tuple, data_file: str) -> dict | li
             return albums
     except requests.exceptions.RequestException as err:
         st.error(str(err), icon="🛠️")
+    except Exception as error:
+        st.error(f"Unexpected has occured.", icon="❌")
     st.error("No albums found.")
     return {}
 
