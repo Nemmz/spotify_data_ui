@@ -1,0 +1,10 @@
+#virtual environment
+.venv/
+venv/
+
+#python cache files
+** /__pycache__/
+**/*.py[cod]
+
+#Git
+.gitignore
