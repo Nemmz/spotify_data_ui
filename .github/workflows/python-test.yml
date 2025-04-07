@@ -4,7 +4,6 @@
 # Author: Isaac Jarrells
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 
-
 name: run-tests
 env:
   PYTHON_VERSION: "3.13"
@@ -27,6 +26,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Python ${{ env.PYTHON_VERSION }}
         uses: actions/setup-python@v5
         with:
@@ -41,6 +41,7 @@ jobs:
         run: |
           pip install -r tests/requirements.txt
           pip install -r ./requirements.txt
+          pip install autopep8 
 
       - name: Lint with autopep8
         run: |
@@ -51,3 +52,4 @@ jobs:
         env:
           SPOTIFY_CLIENT_ID: ${{ secrets.CLIENT_ID }}
           SPOTIFY_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+
