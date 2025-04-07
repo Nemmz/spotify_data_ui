@@ -32,11 +32,6 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      - name: Create and start virtual environment
-        run: |
-          python -m venv venv
-          source venv/bin/activate
-
       - name: Install dependencies
         run: |
           pip install -r tests/requirements.txt
@@ -45,7 +40,7 @@ jobs:
 
       - name: Lint with autopep8
         run: |
-          autopep8 --exit-code --recursive --diff --aggressive --max-line-length 120 ./app
+          autopep8 --exit-code --recursive --diff --aggressive --max-line-length 120 .
 
       - name: Test with pytest
         run: pytest
