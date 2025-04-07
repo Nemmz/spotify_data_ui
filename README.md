@@ -17,6 +17,14 @@ A Python application that fetches artist data from Spotify's API and displays re
 - **`test/`**: Includes unit tests for the functions within the `app/` folder to ensure functionality.
 - **`Dockerfile`**: Adds the addition of running the streamlit app with Docker and can be accessed through localhost
 
+The App will display the following:
+- Name of Artist
+- Their General Popularity
+- Top Tracks
+- Top Albums
+- Link to the Spotify Profile
+- Their Artist Profile Picture
+
 **WebApp Example:**
 ![WebApp Screenshot](app/assets/appview.jpg)
 
