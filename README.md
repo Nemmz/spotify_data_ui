@@ -8,7 +8,7 @@
 
 ---
 
-A sleek Python application that fetches **artist data from the Spotify API** and displays it in a clean, interactive UI using the **Streamlit** library.
+A Python application that fetches **artist data from the Spotify API** and displays it in a clean, interactive UI using the **Streamlit** library.
 
 ---
 
