@@ -1,6 +1,6 @@
 # Spotify Data UI: Spotify Artist Data
 
-![Build](https://img.shields.io/github/actions/workflow/status/your-username/spotify-data-ui/deploy.yml)
+![Build](https://img.shields.io/github/actions/workflow/status/Nemmz/spotify-data-ui/deploy.yml)
 ![License](https://img.shields.io/github/license/Nemmz/spotify-data-ui)
 ![Python Version](https://img.shields.io/badge/python-3.10-blue)
 ![Streamlit](https://img.shields.io/badge/built%20with-Streamlit-orange)
