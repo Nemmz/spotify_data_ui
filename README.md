@@ -23,7 +23,9 @@ A sleek Python application that fetches **artist data from the Spotify API** and
 ---
 
 ## 📁 Project Structure
-
+- **`app/`**: Contains the main code and assets for the app.
+- **`test/`**: Includes unit tests for the functions within the `app/` folder to ensure functionality.
+- **`Dockerfile`**: Adds the addition of running the streamlit app with Docker and can be accessed through localhost
 ---
 
 ## 🖼️ WebApp Preview
