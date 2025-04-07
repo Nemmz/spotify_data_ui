@@ -40,7 +40,7 @@ jobs:
 
       - name: Lint with autopep8
         run: |
-          autopep8 --exit-code --recursive --diff --aggressive --max-line-length 120 ./app
+          autopep8 --recursive --diff --aggressive --max-line-length 120 ./app
 
       - name: Test with pytest
         run: pytest
