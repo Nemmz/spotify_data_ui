@@ -1,7 +1,6 @@
 # Spotify Data UI: Spotify Artist Data
 
-![Build](https://img.shields.io/github/actions/workflow/status/Nemmz/spotify-data-ui/deploy.yml)
-![License](https://img.shields.io/github/license/Nemmz/spotify-data-ui)
+[![run-tests](https://github.com/Nemmz/spotify_data_ui/actions/workflows/python-test.yml/badge.svg)](https://github.com/Nemmz/spotify_data_ui/actions/workflows/python-test.yml)
 ![Python Version](https://img.shields.io/badge/python-3.10-blue)
 ![Streamlit](https://img.shields.io/badge/built%20with-Streamlit-orange)
 ![Live Demo](https://img.shields.io/badge/demo-online-brightgreen)
