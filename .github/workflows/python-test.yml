@@ -44,7 +44,7 @@ jobs:
 
       - name: Test with pytest
         run: |
-          PYTHONPATH=./app pytest ./tests
+          PYTHONPATH=. pytest ./tests
         env:
           SPOTIFY_CLIENT_ID: ${{ secrets.CLIENT_ID }}
           SPOTIFY_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
