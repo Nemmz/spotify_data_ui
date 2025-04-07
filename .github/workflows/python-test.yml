@@ -43,7 +43,8 @@ jobs:
           autopep8 --recursive --diff --aggressive --max-line-length 120 ./app
 
       - name: Test with pytest
-        run: pytest
+        run: |
+          PYTHONPATH=./app pytest ./tests
         env:
           SPOTIFY_CLIENT_ID: ${{ secrets.CLIENT_ID }}
           SPOTIFY_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
