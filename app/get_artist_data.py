@@ -1,17 +1,33 @@
 """
 Author: Isaac Jarrells
 Date: March 14, 2025,
-Purpose: To grab the important data from Spotify's API. The data will vary and could be changed
-         in the future. At the time of creation they are:
-Resources: Spotify Development Examples
+Purpose: To grab important data from Spotify's API.
+         This may change in the future. Current targets:
+         - Access tokens
+         - Artist details
+         - Top tracks
+         - Albums
+Resources: Spotify Developer Examples
 """
 import json
 import urllib.parse
 import requests
 import streamlit as st
+import os
 
-CLIENT_ID = st.secrets["SPOTIFY_CLIENT_ID"]
-CLIENT_SECRET = st.secrets["SPOTIFY_CLIENT_SECRET"]
+def get_secret(key: str) -> str | None:
+    # Try from environment first
+    if key in os.environ:
+        return os.environ[key]
+
+    # Try from st.secrets, only if Streamlit is running
+    try:
+        return st.secrets.get(key)
+    except (FileNotFoundError, RuntimeError, AttributeError):
+        return None
+
+CLIENT_ID =  get_secret("SPOTIFY_CLIENT_ID")
+CLIENT_SECRET = get_secret("SPOTIFY_CLIENT_SECRET")
 
 def get_token() -> str | None:
     """Grabs an access token from Spotify to allow access to API data."""

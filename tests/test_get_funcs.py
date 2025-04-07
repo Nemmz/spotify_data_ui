@@ -4,10 +4,7 @@ from app.get_artist_data import get_token, search_artist, get_top_tracks, get_al
 
 # Test for get_token function
 def test_get_token():
-    # Here, you would simulate the token returned by the API
-    # For testing purposes, we directly return a mocked token value.
     token = "mocked_token"  # Simulated token
-    # Normally, this would be returned by the 'get_token' function.
     assert token == "mocked_token", f"Expected 'mocked_token', but got {token}"
 
 
@@ -42,7 +39,6 @@ def test_search_artist():
 
 # Test for get_top_tracks function
 def test_get_top_tracks():
-    artist_id = "123"
 
     # Simulating a successful response for top tracks
     mock_data = [
@@ -65,7 +61,6 @@ def test_get_top_tracks():
 
 # Test for get_albums function
 def test_get_albums():
-    artist_id = "123"
 
     # Simulating a successful response for albums
     mock_data = [
