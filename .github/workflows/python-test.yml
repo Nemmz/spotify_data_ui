@@ -38,6 +38,13 @@ jobs:
           pip install -r ./requirements.txt
           pip install autopep8
 
+      - name: Create secrets.toml
+        run: |
+          mkdir -p ~/.streamlit/
+          echo "[spotify]" > ~/.streamlit/secrets.toml
+          echo "client_id = \"${{ secrets.CLIENT_ID }}\"" >> ~/.streamlit/secrets.toml
+          echo "client_secret = \"${{ secrets.CLIENT_SECRET }}\"" >> ~/.streamlit/secrets.toml
+
       - name: Lint with autopep8
         run: |
           autopep8 --recursive --diff --aggressive --max-line-length 120 ./app
@@ -48,4 +55,3 @@ jobs:
         env:
           SPOTIFY_CLIENT_ID: ${{ secrets.CLIENT_ID }}
           SPOTIFY_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-
