@@ -10,4 +10,6 @@ venv/
 .gitignore
 
 # Test Files
-tests
+tests/test_get_funcs.py
+tests/.streamlit
+tests/test_data
