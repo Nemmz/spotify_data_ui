@@ -8,3 +8,6 @@ venv/
 
 #Git
 .gitignore
+
+# Test Files
+tests
