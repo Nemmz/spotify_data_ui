@@ -129,7 +129,7 @@ if text_input:
                     st.text(f"Genres: {', '.join(artist['genres']).title()}")
                 else:
                     st.text("Genres: N/a")
-                with st.expander(f"Popularity: {100 - artist["popularity"]}"):
+                with st.expander(f"Popularity: {101 - artist["popularity"]}"):
                     st.markdown("Popularity is on a scale of 1-100 and is not one to one but rather a general idea "
                                 "of their popularity.")
                 st.text(f"Top Tracks:\n{'\n'.join(get_top_tracks(artist['id'], token, SONG_DATA_FILE))}")
